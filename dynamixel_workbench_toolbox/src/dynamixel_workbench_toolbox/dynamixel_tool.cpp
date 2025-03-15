@@ -17,6 +17,7 @@
 /* Authors: Taehun Lim (Darby), Ryan Shim */
 
 #include "../../include/dynamixel_workbench_toolbox/dynamixel_tool.h"
+#include "dynamixel_workbench_toolbox/dynamixel_item.h"
 
 //===================================================================
 // Define Serial ID to Namd table
@@ -115,7 +116,20 @@ static const DynamixelModel dynamixel_model_table[] = {
 
     {RH_P12_RN, "RH-P12-RN"},
 
-    {RH_P12_RN_A, "RH-P12-RN-A"}
+    {RH_P12_RN_A, "RH-P12-RN-A"},
+
+    {YM070_210_M001_RH, "YM070-210-M001-RH"},
+    {YM070_210_B001_RH, "YM070-210-B001-RH"},
+    {YM070_210_R051_RH, "YM070-210-R051-RH"},
+    {YM070_210_R099_RH, "YM070-210-R099-RH"},
+    {YM070_210_A051_RH, "YM070-210-A051-RH"},
+    {YM070_210_A099_RH, "YM070-210-A099-RH"},
+    {YM080_230_M001_RH, "YM080-230-M001-RH"},
+    {YM080_230_B001_RH, "YM080-230-B001-RH"},
+    {YM080_230_R051_RH, "YM080-230-R051-RH"},
+    {YM080_230_R099_RH, "YM080-230-R099-RH"},
+    {YM080_230_A051_RH, "YM080-230-A051-RH"},
+    {YM080_230_A099_RH, "YM080-230-A099-RH"},
 };
 #define COUNT_DYNAMIXEL_MODEL  (sizeof(dynamixel_model_table)/sizeof(dynamixel_model_table[0]))
 
