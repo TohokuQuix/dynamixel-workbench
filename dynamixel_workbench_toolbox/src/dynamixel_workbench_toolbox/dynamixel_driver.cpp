@@ -17,6 +17,8 @@
 /* Authors: Taehun Lim (Darby) */
 
 #include <memory>
+#include <string>
+#include <cstdlib>
 #include "../../include/dynamixel_workbench_toolbox/dynamixel_driver.h"
 
 DynamixelDriver::DynamixelDriver() : tools_cnt_(0),
@@ -29,11 +31,28 @@ DynamixelDriver::DynamixelDriver() : tools_cnt_(0),
 
 DynamixelDriver::~DynamixelDriver()
 {
-  for (int i = 0; i < tools_cnt_; i++)
+  // Environment variable DXLWB_TORQUE_OFF_ON_EXIT can be used to control whether to turn off torque on destruction.
+  // If set to "0" or "false", torque will be preserved. Otherwise, torque will be turned off (default behavior).
+  const char* torque_off_env = std::getenv("DXLWB_TORQUE_OFF_ON_EXIT");
+  bool should_torque_off = true;
+  
+  if (torque_off_env != nullptr)
   {
-    for (int j = 0; j < tools_[i].getDynamixelCount(); j++)
+    std::string env_value = torque_off_env;
+    if (env_value == "0" || env_value == "false")
     {
-      writeRegister(tools_[i].getID()[j], "Torque_Enable", (uint8_t)0);
+      should_torque_off = false;
+    }
+  }
+
+  if (should_torque_off)
+  {
+    for (int i = 0; i < tools_cnt_; i++)
+    {
+      for (int j = 0; j < tools_[i].getDynamixelCount(); j++)
+      {
+        writeRegister(tools_[i].getID()[j], "Torque_Enable", (uint8_t)0);
+      }
     }
   }
 
